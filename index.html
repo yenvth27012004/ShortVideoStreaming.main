@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>YouTube Shorts Swipe</title>
   <style>
     html, body {
@@ -11,6 +12,8 @@
       width: 100vw;
       height: 100vh;
       overflow: hidden;
+      touch-action: none; /* Ngăn chặn hành vi mặc định trên mobile */
+      -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
     }
     #shorts-container {
       width: 100vw;
@@ -28,6 +31,10 @@
       align-items: center;
       z-index: 9999;
       scroll-snap-type: y mandatory; 
+      scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+    }
+    #shorts-container::-webkit-scrollbar {
+      display: none; /* Ẩn thanh cuộn trên Chrome */
     }
     .short {
       width: 100%;
@@ -45,141 +52,611 @@
       background: #000;
       display: block;
     }
+    .loading-placeholder {
+      width: 100%;
+      height: 100%;
+      background-color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
   </style>
 </head>
 <body>
   <div id="shorts-container">
     <div class="short" style="transform: translateY(0%)">
-      <iframe id="ytplayer0" src="https://www.youtube.com/embed/alhQosN8h7M?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe id="ytplayer0"
+        src="https://www.youtube.com/embed/YvI8sWO7Zv4?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="short" style="transform: translateY(100%)">
-      <iframe id="ytplayer1" src="https://www.youtube.com/embed/HtOJT_yxj9g?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe id="ytplayer1"
+        src="https://www.youtube.com/embed/uXeYuSBGeKs?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="short" style="transform: translateY(200%)">
-      <iframe id="ytplayer2" src="https://www.youtube.com/embed/YTwK96HddCo?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe id="ytplayer2"
+        src="https://www.youtube.com/embed/DJHiGhltZU4?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(300%)">
+      <iframe id="ytplayer3"
+        data-src="https://www.youtube.com/embed/mc8Uqk7DgyY?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(400%)">
+      <iframe id="ytplayer4"
+        data-src="https://www.youtube.com/embed/y3kXrHK5Nkw?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(500%)">
+      <iframe id="ytplayer5"
+        data-src="https://www.youtube.com/embed/FqbDUEuwqT8?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(600%)">
+      <iframe id="ytplayer6"
+        data-src="https://www.youtube.com/embed/aGSa6cIKgqo?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(700%)">
+      <iframe id="ytplayer7"
+        data-src="https://www.youtube.com/embed/YBSAVxDdnB8?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(800%)">
+      <iframe id="ytplayer8"
+        data-src="https://www.youtube.com/embed/UsxvGU7XIDY?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(900%)">
+      <iframe id="ytplayer9"
+        data-src="https://www.youtube.com/embed/JSf3Yh3094s?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1000%)">
+      <iframe id="ytplayer10"
+        data-src="https://www.youtube.com/embed/o2JA_I7yLN4?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1100%)">
+      <iframe id="ytplayer11"
+        data-src="https://www.youtube.com/embed/3X9mH_hR_6E?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1200%)">
+      <iframe id="ytplayer12"
+        data-src="https://www.youtube.com/embed/kKFrv_LcTYQ?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1300%)">
+      <iframe id="ytplayer13"
+        data-src="https://www.youtube.com/embed/dL8uZPZ32-k?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1400%)">
+      <iframe id="ytplayer14"
+        data-src="https://www.youtube.com/embed/u2yIDThk234?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1500%)">
+      <iframe id="ytplayer15"
+        data-src="https://www.youtube.com/embed/D-uMMsQl-jA?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1600%)">
+      <iframe id="ytplayer16"
+        data-src="https://www.youtube.com/embed/lAh4MtTwZQE?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1700%)">
+      <iframe id="ytplayer17"
+        data-src="https://www.youtube.com/embed/edb1w3AhzbY?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1800%)">
+      <iframe id="ytplayer18"
+        data-src="https://www.youtube.com/embed/8hgod_Kf7gY?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(1900%)">
+      <iframe id="ytplayer19"
+        data-src="https://www.youtube.com/embed/TpUs94sR1IQ?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2000%)">
+      <iframe id="ytplayer20"
+        data-src="https://www.youtube.com/embed/NC0uwIbiFC8?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2100%)">
+      <iframe id="ytplayer21"
+        data-src="https://www.youtube.com/embed/977RfzE0Q7s?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2200%)">
+      <iframe id="ytplayer22"
+        data-src="https://www.youtube.com/embed/XuFZMHpYO5U?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2300%)">
+      <iframe id="ytplayer23"
+        data-src="https://www.youtube.com/embed/hmgKvIjKdtI?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2400%)">
+      <iframe id="ytplayer24"
+        data-src="https://www.youtube.com/embed/8PLZLEb2Z4o?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2500%)">
+      <iframe id="ytplayer25"
+        data-src="https://www.youtube.com/embed/fWOHSI_dHsY?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2600%)">
+      <iframe id="ytplayer26"
+        data-src="https://www.youtube.com/embed/DRGDJkG4x0A?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2700%)">
+      <iframe id="ytplayer27"
+        data-src="https://www.youtube.com/embed/uZu670r3Y4g?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2800%)">
+      <iframe id="ytplayer28"
+        data-src="https://www.youtube.com/embed/bIq7fsO2IsU?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(2900%)">
+      <iframe id="ytplayer29"
+        data-src="https://www.youtube.com/embed/Fwio-Dziv80?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3000%)">
+      <iframe id="ytplayer30"
+        data-src="https://www.youtube.com/embed/p3DGVL3ft0Q?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3100%)">
+      <iframe id="ytplayer31"
+        data-src="https://www.youtube.com/embed/WXNwUcZIVEY?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3200%)">
+      <iframe id="ytplayer32"
+        data-src="https://www.youtube.com/embed/wTfQpyrvenQ?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3300%)">
+      <iframe id="ytplayer33"
+        data-src="https://www.youtube.com/embed/ljaAfgAlE3Y?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3400%)">
+      <iframe id="ytplayer34"
+        data-src="https://www.youtube.com/embed/HQCgaU11j80?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3500%)">
+      <iframe id="ytplayer35"
+        data-src="https://www.youtube.com/embed/LhSAbVD-FDo?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3600%)">
+      <iframe id="ytplayer36"
+        data-src="https://www.youtube.com/embed/W-8dhmCPags?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3700%)">
+      <iframe id="ytplayer37"
+        data-src="https://www.youtube.com/embed/53ASiscJxs8?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3800%)">
+      <iframe id="ytplayer38"
+        data-src="https://www.youtube.com/embed/ERgtnsRaPKE?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(3900%)">
+      <iframe id="ytplayer39"
+        data-src="https://www.youtube.com/embed/MPHaNxQEpWA?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4000%)">
+      <iframe id="ytplayer40"
+        data-src="https://www.youtube.com/embed/4fyAbl0b6zU?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4100%)">
+      <iframe id="ytplayer41"
+        data-src="https://www.youtube.com/embed/Z8SKOQ9KkH0?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4200%)">
+      <iframe id="ytplayer42"
+        data-src="https://www.youtube.com/embed/-2Hn2mxA3GQ?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4300%)">
+      <iframe id="ytplayer43"
+        data-src="https://www.youtube.com/embed/3mjp0EQ4jJQ?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4400%)">
+      <iframe id="ytplayer44"
+        data-src="https://www.youtube.com/embed/nh1t75IuwcI?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4500%)">
+      <iframe id="ytplayer45"
+        data-src="https://www.youtube.com/embed/E0RG6ESxW-o?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4600%)">
+      <iframe id="ytplayer46"
+        data-src="https://www.youtube.com/embed/dz4YNcmmw_I?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4700%)">
+      <iframe id="ytplayer47"
+        data-src="https://www.youtube.com/embed/zxpo3txQRPo?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4800%)">
+      <iframe id="ytplayer48"
+        data-src="https://www.youtube.com/embed/C-dn6BZY9h8?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(4900%)">
+      <iframe id="ytplayer49"
+        data-src="https://www.youtube.com/embed/x41XEezrIFg?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5000%)">
+      <iframe id="ytplayer50"
+        data-src="https://www.youtube.com/embed/L71jZlYkOUA?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5100%)">
+      <iframe id="ytplayer51"
+        data-src="https://www.youtube.com/embed/H0KQ1k6inN0?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5200%)">
+      <iframe id="ytplayer52"
+        data-src="https://www.youtube.com/embed/Ywfm3paCz3c?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5300%)">
+      <iframe id="ytplayer53"
+        data-src="https://www.youtube.com/embed/Z6TWvtyyXOc?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5400%)">
+      <iframe id="ytplayer54"
+        data-src="https://www.youtube.com/embed/NsJqs7AB3Ps?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5500%)">
+      <iframe id="ytplayer55"
+        data-src="https://www.youtube.com/embed/s3MTclcWSmw?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5600%)">
+      <iframe id="ytplayer56"
+        data-src="https://www.youtube.com/embed/jmBTRotQVKE?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5700%)">
+      <iframe id="ytplayer57"
+        data-src="https://www.youtube.com/embed/bPfDZkcXiXo?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5800%)">
+      <iframe id="ytplayer58"
+        data-src="https://www.youtube.com/embed/8ED7QJzQHVk?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(5900%)">
+      <iframe id="ytplayer59"
+        data-src="https://www.youtube.com/embed/7KiTeElJL6Q?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6000%)">
+      <iframe id="ytplayer60"
+        data-src="https://www.youtube.com/embed/A7J_OCq6mD8?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6100%)">
+      <iframe id="ytplayer61"
+        data-src="https://www.youtube.com/embed/8ywFJ1AmUJo?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6200%)">
+      <iframe id="ytplayer62"
+        data-src="https://www.youtube.com/embed/IgMi7HWeUfk?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6300%)">
+      <iframe id="ytplayer63"
+        data-src="https://www.youtube.com/embed/pSNfRIOR5l0?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6400%)">
+      <iframe id="ytplayer64"
+        data-src="https://www.youtube.com/embed/tEw-djR436s?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6500%)">
+      <iframe id="ytplayer65"
+        data-src="https://www.youtube.com/embed/Fy_VGv--nvw?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6600%)">
+      <iframe id="ytplayer66"
+        data-src="https://www.youtube.com/embed/R5SnnXa7W9I?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6700%)">
+      <iframe id="ytplayer67"
+        data-src="https://www.youtube.com/embed/mT8ECHCImRk?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6800%)">
+      <iframe id="ytplayer68"
+        data-src="https://www.youtube.com/embed/nHEvRap9330?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(6900%)">
+      <iframe id="ytplayer69"
+        data-src="https://www.youtube.com/embed/RkLKldA7wOM?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7000%)">
+      <iframe id="ytplayer70"
+        data-src="https://www.youtube.com/embed/QFGOAMVAfeg?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7100%)">
+      <iframe id="ytplayer71"
+        data-src="https://www.youtube.com/embed/lIhin_86XnU?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7200%)">
+      <iframe id="ytplayer72"
+        data-src="https://www.youtube.com/embed/QIcooaDpI5M?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7300%)">
+      <iframe id="ytplayer73"
+        data-src="https://www.youtube.com/embed/0qjkgoLl05E?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7400%)">
+      <iframe id="ytplayer74"
+        data-src="https://www.youtube.com/embed/BCNWqh0un4g?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7500%)">
+      <iframe id="ytplayer75"
+        data-src="https://www.youtube.com/embed/xeK0Hto4RnU?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7600%)">
+      <iframe id="ytplayer76"
+        data-src="https://www.youtube.com/embed/j6S28fsmp1U?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7700%)">
+      <iframe id="ytplayer77"
+        data-src="https://www.youtube.com/embed/qdw9qFzkGC0?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7800%)">
+      <iframe id="ytplayer78"
+        data-src="https://www.youtube.com/embed/iO88QrZB_YU?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(7900%)">
+      <iframe id="ytplayer79"
+        data-src="https://www.youtube.com/embed/C4k_PF-_uIs?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8000%)">
+      <iframe id="ytplayer80"
+        data-src="https://www.youtube.com/embed/QcQ_j1Qhw_U?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8100%)">
+      <iframe id="ytplayer81"
+        data-src="https://www.youtube.com/embed/VjffG1ROFBo?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8200%)">
+      <iframe id="ytplayer82"
+        data-src="https://www.youtube.com/embed/36dzsMO7dMo?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8300%)">
+      <iframe id="ytplayer83"
+        data-src="https://www.youtube.com/embed/ati6QQxqIlI?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8400%)">
+      <iframe id="ytplayer84"
+        data-src="https://www.youtube.com/embed/ALIskWqwRe8?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8500%)">
+      <iframe id="ytplayer85"
+        data-src="https://www.youtube.com/embed/b2r3oYrmLR0?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8600%)">
+      <iframe id="ytplayer86"
+        data-src="https://www.youtube.com/embed/1Eb5AfWxUWg?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8700%)">
+      <iframe id="ytplayer87"
+        data-src="https://www.youtube.com/embed/XrEAVgYaXrs?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8800%)">
+      <iframe id="ytplayer88"
+        data-src="https://www.youtube.com/embed/XxXXuEokVx0?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(8900%)">
+      <iframe id="ytplayer89"
+        data-src="https://www.youtube.com/embed/Gwat_tYfzK0?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9000%)">
+      <iframe id="ytplayer90"
+        data-src="https://www.youtube.com/embed/g-7snlpAQxw?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9100%)">
+      <iframe id="ytplayer91"
+        data-src="https://www.youtube.com/embed/hJMvj2zWh68?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9200%)">
+      <iframe id="ytplayer92"
+        data-src="https://www.youtube.com/embed/o8LxD87gWCI?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9300%)">
+      <iframe id="ytplayer93"
+        data-src="https://www.youtube.com/embed/uA9Zcg3vHvo?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9400%)">
+      <iframe id="ytplayer94"
+        data-src="https://www.youtube.com/embed/pFPCVMTedyc?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9500%)">
+      <iframe id="ytplayer95"
+        data-src="https://www.youtube.com/embed/ziq0mCh_NiA?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9600%)">
+      <iframe id="ytplayer96"
+        data-src="https://www.youtube.com/embed/-tBSxIN5v-A?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9700%)">
+      <iframe id="ytplayer97"
+        data-src="https://www.youtube.com/embed/cxiWzpxnhZE?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9800%)">
+      <iframe id="ytplayer98"
+        data-src="https://www.youtube.com/embed/XnNpTho8lHM?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="short" style="transform: translateY(9900%)">
+      <iframe id="ytplayer99"
+        data-src="https://www.youtube.com/embed/xQ3yp-p9xxk?autoplay=1&mute=1&controls=0&loop=1&enablejsapi=1"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
   </div>
 
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script>
-    const shorts = document.querySelectorAll('.short');
-    let currentIndex = 0;
-    let startY = 0;
-    let isTouch = false;
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  const container = document.getElementById('shorts-container');
+  const shorts = document.querySelectorAll('.short');
+  let currentIndex = 0;
+  let playStart = Date.now();
+  const playTimes = Array(shorts.length).fill(0);
+  let ytPlayers = [];
 
-    // --- Play time tracking ---
-    const playTimes = Array(shorts.length).fill(0); // ms
-    let playStart = Date.now();
+  function logPlayTime(idx) {
+    const now = Date.now();
+    playTimes[idx] += now - playStart;
+    console.log(`Video ${idx} play time: ${playTimes[idx] / 1000}s`);
+    playStart = now;
+  }
 
-    function logPlayTime(index) {
-      const now = Date.now();
-      playTimes[index] += now - playStart;
-      console.log(`Video ${index} play time: ${playTimes[index] / 1000}s`);
-      playStart = now;
+  // Chỉ gắn src cho video trong vùng cho phép
+  function loadVideo(idx) {
+    if (idx < 0 || idx >= shorts.length) return;
+    const iframe = shorts[idx].querySelector('iframe');
+    if (iframe && !iframe.src && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      ytPlayers[idx] = new YT.Player(iframe.id, {
+        events: {
+          onReady: (ev) => {
+            console.log(`Video ${idx} duration: ${ev.target.getDuration()}s`);
+          }
+        }
+      });
+      console.log(`Lazy loaded video ${idx}`);
     }
+  }
 
-    // --- Log video duration ---
-    let ytPlayers = [];
-    function onYouTubeIframeAPIReady() {
-      shorts.forEach((short, i) => {
-        const iframe = short.querySelector('iframe');
+  // Hàm lazy load ±2 xung quanh currentIndex
+  function lazyLoadAround(index) {
+    // load video hiện tại và 2 trước, 2 sau
+    for (let i = index - 2; i <= index + 2; i++) {
+      loadVideo(i);
+    }
+  }
+
+  function onYouTubeIframeAPIReady() {
+    // nạp 3 video đầu
+    lazyLoadAround(1); // window ±2 sẽ load index 0..3 (đầu tiên chỉ có tối đa 2 trước 1)
+    // khởi tạo player đã có src
+    shorts.forEach((short, i) => {
+      const iframe = short.querySelector('iframe');
+      if (iframe && iframe.src && !ytPlayers[i]) {
         ytPlayers[i] = new YT.Player(iframe.id, {
           events: {
-            'onReady': (event) => {
-              const duration = event.target.getDuration();
-              console.log(`Video ${i} duration: ${duration}s`);
-            }
+            onReady: (ev) => console.log(`Video ${i} duration: ${ev.target.getDuration()}s`)
           }
         });
-      });
-    }
-
-    // --- Touch events (mobile & touchpad) ---
-    document.addEventListener('touchstart', (e) => {
-      console.log('Touch start detected');
-      isTouch = true;
-      startY = e.touches[0].clientY;
-    });
-
-    document.addEventListener('touchend', (e) => {
-      if (!isTouch) return;
-      const endY = e.changedTouches[0].clientY;
-      handleSwipe(endY - startY);
-    });
-
-    // Mouse events (touchpad swipe)
-    let mouseDown = false;
-    let mouseStartY = 0;
-    document.addEventListener('mousedown', (e) => {
-      isTouch = false;
-      mouseDown = true;
-      mouseStartY = e.clientY;
-    });
-
-    document.addEventListener('mouseup', (e) => {
-      if (!mouseDown) return;
-      mouseDown = false;
-      const deltaY = e.clientY - mouseStartY;
-      handleSwipe(deltaY);
-    });
-
-    // Wheel event (for touchpad two-finger swipe)
-    document.addEventListener('wheel', (e) => {
-      // Only vertical scroll
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && Math.abs(e.deltaY) > 5) {
-        handleSwipe(e.deltaY);
       }
     });
+  }
 
-    // Keyboard events for up/down arrow keys
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowDown') {
-        console.log('ArrowDown key pressed');
-        handleSwipe(-100); // Simulate swipe up
-      } else if (e.key === 'ArrowUp') {
-        console.log('ArrowUp key pressed');
-        handleSwipe(100); // Simulate swipe down
-      }
+  // Dừng tất cả, phát video hiện tại
+  function updateActiveVideo() {
+    shorts.forEach((short, idx) => {
+      if (ytPlayers[idx]) ytPlayers[idx].pauseVideo?.();
     });
+    if (ytPlayers[currentIndex]) ytPlayers[currentIndex].playVideo?.();
+    playStart = Date.now();
+  }
 
-    function handleSwipe(deltaY) {
-      if (isTouch) {
-        // For touch events
-        deltaY = -deltaY; // Invert for touch swipe direction
-      } else if (mouseDown) {
-        // For mouse events
-        deltaY = -deltaY; // Invert for mouse swipe direction
-      }
-      if (Math.abs(deltaY) > 5) {
-        if (deltaY < 0 && currentIndex < shorts.length - 1) {
-          logPlayTime(currentIndex);
-          currentIndex++;
-        } else if (deltaY > 0 && currentIndex > 0) {
-          logPlayTime(currentIndex);
-          currentIndex--;
-        }
-        updateShorts();
-      }
-    }
-
-    function updateShorts() {
-      shorts.forEach((short, index) => {
-        short.style.transform = `translateY(${(index - currentIndex) * 100}%)`;
-        const iframe = short.querySelector('iframe');
-        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-      });
-      const currentIframe = shorts[currentIndex].querySelector('iframe');
-      currentIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-      playStart = Date.now();
-    }
-
-    // Log play time when user leaves the page
-    window.addEventListener('beforeunload', () => {
+  // Khi cuộn: tính index, lazy load ±2
+  container.addEventListener('scroll', () => {
+    const newIndex = Math.round(container.scrollTop / window.innerHeight);
+    if (newIndex !== currentIndex) {
       logPlayTime(currentIndex);
-      playTimes.forEach((t, i) => {
-        console.log(`Final Video ${i} play time: ${t / 1000}s`);
-      });
+      currentIndex = newIndex;
+      lazyLoadAround(currentIndex);
+      updateActiveVideo();
+    }
+  });
+
+  window.addEventListener('beforeunload', () => {
+    logPlayTime(currentIndex);
+    playTimes.forEach((t, i) => {
+      console.log(`Final Video ${i} play time: ${t / 1000}s`);
     });
-  </script>
+  });
+
+  // Scroll về đầu
+  document.addEventListener('DOMContentLoaded', () => {
+    container.scrollTo({ top: 0 });
+    lazyLoadAround(currentIndex); // load vùng ban đầu
+  });
+</script>
 </body>
 </html>
